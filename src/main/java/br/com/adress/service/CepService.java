@@ -1,6 +1,6 @@
 package br.com.adress.service;
 
-import br.com.adress.dto.CepRequest;
+import br.com.adress.dto.DadosEndereco;
 import br.com.adress.model.CepModel;
 import br.com.adress.repository.CepRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,17 +12,31 @@ public class CepService {
     @Autowired
     private CepRepository cepRepository;
 
-    public void process(CepRequest cepRequest) {
-
-        CepModel cepModel = cepRepository.findByCep(cepRequest.getCep());
+    public void save(DadosEndereco dadosEndereco) {
 
         cepRepository.save(CepModel.builder()
-                .cep(cepRequest.getCep())
-                .rua(cepRequest.getRua())
-                .bairro(cepRequest.getBairro())
-                .cidade(cepRequest.getCidade())
-                .estado(cepRequest.getEstado())
-                .pais(cepRequest.getPais())
+                .cep(dadosEndereco.getCep())
+                .rua(dadosEndereco.getRua())
+                .bairro(dadosEndereco.getBairro())
+                .cidade(dadosEndereco.getCidade())
+                .estado(dadosEndereco.getEstado())
+                .pais(dadosEndereco.getPais())
                 .build());
     }
+
+    public DadosEndereco buscaCep(String cep) {
+
+        CepModel endereco = cepRepository.findByCep(cep);
+
+        return DadosEndereco
+                .builder()
+                .cep(endereco.getCep())
+                .rua(endereco.getRua())
+                .bairro(endereco.getBairro())
+                .cidade(endereco.getCidade())
+                .estado(endereco.getEstado())
+                .pais(endereco.getPais())
+                .build();
+    }
 }
+

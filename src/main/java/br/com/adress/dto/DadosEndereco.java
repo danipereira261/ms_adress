@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CepRequest {
+public class DadosEndereco {
 
     @NotNull(message = "Cep é obrigatório")
     @NotEmpty(message = "Cep não pode ser vazio")
